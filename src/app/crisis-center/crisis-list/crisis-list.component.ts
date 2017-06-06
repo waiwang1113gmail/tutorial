@@ -15,8 +15,8 @@ import { CrisisService } from '../crisis.service';
 export class CrisisListComponent implements OnInit {
 
   crises: Observable<Crisis[]>;
+  componentError: string;
   private selectedId: number;
-
   constructor(private crisisService: CrisisService,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -25,6 +25,7 @@ export class CrisisListComponent implements OnInit {
   ngOnInit(): void {
     this.crises = this.route.params
       .switchMap((params: Params) =>{
+        this.componentError = params['error']? `Crisis not found for id ${params['error']}`:null;
         this.selectedId = +params['id'];
         return this.crisisService.getCrises();
       })

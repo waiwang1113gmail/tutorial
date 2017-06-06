@@ -1,5 +1,5 @@
 import { Component }   from '@angular/core';
-import { Router }      from '@angular/router';
+import { Router, NavigationExtras }      from '@angular/router';
 import { AuthService } from './auth.service';
 @Component({
   template: `
@@ -26,8 +26,13 @@ export class LoginComponent {
         // Get the redirect URL from our auth service
         // If no redirect has been set, use the default
         let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/crisis-center/admin';
+
+        let navExtras: NavigationExtras ={
+          preserveFragment:true,
+          preserveQueryParams: true
+        }
         // Redirect the user
-        this.router.navigate([redirect]);
+        this.router.navigate([redirect], navExtras);
       }
     });
   }

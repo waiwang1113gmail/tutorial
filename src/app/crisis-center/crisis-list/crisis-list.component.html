@@ -1,4 +1,6 @@
 <h2>Crises</h2>
+
+<h3>{{componentError}}</h3>
 <ul class="crises">
   <li *ngFor="let crisis of crises | async" [class.selected]="crisis.id === selectedId" (click)="onSelect(crisis)">
     <span class="badge">{{crisis.id}}</span> {{crisis.name}}
